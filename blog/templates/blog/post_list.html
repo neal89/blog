@@ -1,0 +1,84 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+{% block content %}
+    {% for post in object_list %}
+
+          <div class="mdl-card on-the-road-again mdl-cell mdl-cell--8-col">
+           
+            <div class="mdl-card__media cover_image mdl-color-text--grey-50" style="background-image: url({% get_media_prefix %}{{ post.cover_image }});">
+             <!-- <h3 style="background:linear-gradient(transparent,#000000); height:180px; width:100%; font-size:25px; line-height:32px;">
+                <a href="entry.html" style="padding:24px; display:block; position:relative; top:55px;">{{ post.title }}</a></h3> -->
+
+             <h3 style="background:linear-gradient(transparent,#000000); height:170px; width:100%; display:block; position:relative;"><span style="position: absolute; bottom: 0; left: 0; display:block"><a href="{% url 'PostsDetailView' slug=post.slug %}" class="hello" style="display:block; position:relative;">{{ post.title }}</a></span></h3>
+                   
+            </div>
+            <div class="mdl-color-text--grey-600 mdl-card__supporting-text">
+              <p>{{ post.text|truncatewords:"38" }} <a href="{% url 'PostsDetailView' slug=post.slug %}">Read More</a> </p>
+            </div>
+            <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+              <div class="minilogo"></div>
+              <div>
+                <strong>{{ post.author }}</strong>
+                <span>{{ post.published_date|date:"d M, Y" }}</span>
+                
+              </div>
+            </div>
+          </div>
+
+         {% if forloop.counter|divisibleby:2 %}
+          <div class="mdl-cell mdl-cell--8-col">
+            <div class="mdl-color-text--grey-600">
+                <p style= "padding:16px;">After every second post! Google Ads</p>
+            </div>
+          </div>
+        
+
+         {% endif %}
+
+
+
+       
+       
+    {% endfor %}
+    {% if is_paginated %}
+        <nav class="demo-nav mdl-cell mdl-cell--8-col">
+          
+              {% if page_obj.has_previous %}
+                
+                  <a class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--white" href="?page={{ page_obj.previous_page_number }}">
+                    Previous
+                  </a>
+                
+              {% else %}
+                
+                  
+                    <span class="mdl-button" disabled>Previous</span>
+                  
+                
+              {% endif %}
+
+              {% for page in paginator.page_range %}
+                {% if page == page_obj.number %}
+                  <span class="mdl-color-text--grey-600">Page {{ page }}</span>
+                {% endif %}
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+                
+                  <a class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--white" style="font-size:14px;" href="?page={{ page_obj.next_page_number }}">
+                    Next
+                  </a>
+                
+              {% else %}
+                {% if not page_obj.has_next %}
+                  
+                    <span class="mdl-button" disabled>Next</span>
+                  
+                {% endif %}
+              {% endif %}
+          </ul>
+        </nav>
+    {% endif %}
+{% endblock %}

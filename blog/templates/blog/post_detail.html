@@ -1,0 +1,40 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% block content %}
+
+          <div class="mdl-card on-the-road-again mdl-cell mdl-cell--8-col">
+           
+            <div class="mdl-card__media cover_image mdl-color-text--grey-50" style="background-image: url({% get_media_prefix %}{{ post.cover_image }});">
+             <!-- <h3 style="background:linear-gradient(transparent,#000000); height:180px; width:100%; font-size:25px; line-height:32px;">
+                <a href="entry.html" style="padding:24px; display:block; position:relative; top:55px;">{{ post.title }}</a></h3> -->
+
+             <h3 style="background:linear-gradient(transparent,#000000); height:170px; width:100%; display:block; position:relative;"><span style="position: absolute; bottom: 0; left: 0; display:block"><a href="entry.html" class="hello" style="display:block; position:relative;">{{ post.title }}</a></span></h3>
+                   
+            </div>
+            <div class="mdl-color-text--grey-600 mdl-card__supporting-text">
+              <p>{{ post.text}}</p>
+            </div>
+            <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+              <div class="minilogo"></div>
+              <div>
+                <strong>{{ post.author }}</strong>
+                <span>{{ post.published_date|date:"d M, Y" }}</span>
+                
+              </div>
+            </div>
+          </div>
+
+
+          <nav class="demo-nav mdl-cell mdl-cell--8-col">
+             <button class="mdl-button mdl-js-button  mdl-color--primary mdl-color-text--white mdl-js-ripple-effect mdl-button--icon" onclick="goBack()"><i class="material-icons" role="presentation">arrow_back</i></button>
+          </nav>
+
+
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+{% endblock %}
