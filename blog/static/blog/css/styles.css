@@ -42,7 +42,7 @@ body::before {
 
     display: block !important;
     position: relative;
-    left: calc(50% - 56px);  
+    left: calc(50% - 106px);  
     /* for logo width 40px we keep 50% -56px.
 
     lets see how we derive it
@@ -56,7 +56,7 @@ body::before {
     step 6 - rewirting above in terms of formula - left should be 50% - 1/2 (drawer + logo)
     step 7 - we have left = 50% - 1/2(72+40) => 50% - 1/2(112) =>50% - 56px
     Step 8 - now lets set logo size to 140px then we will have left = 50% - 1/2(72+140) =>50% - 1/2(212) => 50% - 106px
-
+    for 172 width of logo --> 212/2 = 106 
     */
   }
 
